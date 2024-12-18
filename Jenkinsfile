@@ -3,21 +3,26 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh './gradlew build'
+                dir('java_course_4.0_Kotiai-java-basics-testng') {
+                    sh './gradlew build'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh './gradlew check'
+                dir('java_course_4.0_Kotiai-java-basics-testng') {
+                    sh './gradlew test'
+                }
             }
         }
     }
-
     post {
         always {
-            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-            junit 'build/test-results/**/*.xml'
-
+            dir('java_course_4.0_Kotiai-java-basics-testng') {
+                archiveArtifacts artifacts: 'build/libs/*.jar', allowEmptyArchive: true
+                junit 'build/test-results/**/*.xml'
+            }
         }
     }
 }
+
