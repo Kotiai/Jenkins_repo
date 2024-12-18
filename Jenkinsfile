@@ -1,19 +1,11 @@
 pipeline {
     agent {
-        label '!windows'
+        docker { image 'node:22.12.0-alpine3.21' }
     }
-
-    environment {
-        DISABLE_AUTH = 'true'
-        DB_ENGINE    = 'sqlite'
-    }
-
     stages {
-        stage('Build') {
+        stage('Test') {
             steps {
-                echo "Database engine is ${DB_ENGINE}"
-                echo "DISABLE_AUTH is ${DISABLE_AUTH}"
-                sh 'printenv'
+                sh 'node --eval "console.log(process.arch,process.platform)"'
             }
         }
     }
