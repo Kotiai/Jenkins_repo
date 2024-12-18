@@ -1,0 +1,40 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Commons-Math3 Suite">
+    <test name="SimpleTest">
+        <classes>
+            <class name="example.SimpleTest"/>
+        </classes>
+    </test>
+    <test name="TestClassOne Tests">
+        <groups>
+            <run>
+                <include name="preconditions"/>
+                <include name="group1"/>
+                <exclude name="group3"/>
+                <include name="cleanup"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="example.TestClassOne"/>
+        </classes>
+    </test>
+    <test name="TestClassTwo - Tests With XML Parameters">
+        <classes>
+            <class name="example.TestClassTwo">
+                <methods>
+                    <include name="testMeanWithXmlParams">
+                        <parameter name="meanParam1" value="5.0"/>
+                        <parameter name="meanParam2" value="15.0"/>
+                    </include>
+                    <include name="testVarianceWithDataProvider"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="TestClassThree Tests">
+        <classes>
+            <class name="example.TestClassThree"/>
+        </classes>
+    </test>
+</suite>
+
