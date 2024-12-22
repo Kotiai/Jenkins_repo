@@ -18,6 +18,26 @@ pipeline {
                 }
             }
         }
+        stage('Deploy - Staging') {
+            steps {
+                dir("${PROJECT_DIR}") {
+                    echo 'Deploying to Staging environment...'
+                    echo 'Running smoke tests on Staging...'
+                }
+            }
+        }
+        stage('Sanity check') {
+            steps {
+                input "Does the staging environment look ok?"
+            }
+        }
+        stage('Deploy - Production') {
+            steps {
+                dir("${PROJECT_DIR}") {
+                    echo 'Deploying to Production environment...'
+                }
+            }
+        }
     }
     post {
         always {
